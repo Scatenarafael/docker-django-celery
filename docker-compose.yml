@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  web:
+    container_name: django
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # restart: always
+    command: sh -c "chmod +x /app/migrate.sh && sh /app/migrate.sh && chmod +x /app/entrypoint.sh && sh /app/entrypoint.sh"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    expose:
+      - 8000
