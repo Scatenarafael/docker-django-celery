@@ -9,8 +9,17 @@ services:
     # restart: always
     command: sh -c "chmod +x /app/migrate.sh && sh /app/migrate.sh && chmod +x /app/entrypoint.sh && sh /app/entrypoint.sh"
     volumes:
+      - static_volume:/app/public/staticfiles
+      - media_volume:/app/public/uploads
       - .:/app
     env_file:
       - .env
     expose:
       - 8000
+    ports:
+      - 8000:8000
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
